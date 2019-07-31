@@ -3,6 +3,10 @@ import { TurnOrder } from "boardgame.io/dist/core";
 
 export const PowerLevel = Game({
   setup: () => ({ deck: 5, hand: 0 }),
+  // TODO: Initialize array of Cards in G.deck
+  // TODO: Initialize array of Cards in G.active
+  // TODO: Initialize array of Cards in G.reserve
+  // TODO: Initialize currCard
 
   moves: {
     draftCard: (G, Card) => {
@@ -15,10 +19,11 @@ export const PowerLevel = Game({
       G.reserve.push(Card);
     }
 
-    playCard: G => {
+    playCard: (G, Card) => {
       // TODO: This move will allow a player to select a card.
       // Thereafter, the player will be able to activate attacks,
       // abilities, or switch with reserve card
+      G.currCard = Card;
     },
   },
 
@@ -26,6 +31,12 @@ export const PowerLevel = Game({
     startingPhase: 'draft',
 
     turnOrder: TurnOrder.DEFAULT,
+
+    endGameIf: (G, ctx) => {
+      if (IsWinner(G, ctx.currentPlayer)) {
+        return ctx.currentPlayer;
+      }
+    },
 
     phases: {
       draft: { // players draft 5 active cards, 3 reserve
