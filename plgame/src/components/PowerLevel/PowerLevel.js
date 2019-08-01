@@ -1,7 +1,7 @@
 import { Game } from "boardgame.io/core";
 import { TurnOrder } from "boardgame.io/dist/core";
 
-export const PowerLevel = Game({
+const PowerLevel = Game({
   setup: () => ({ deck: 5, hand: 0 }),
   // TODO: Initialize array of Cards in G.deck
   // TODO: Initialize array of Cards in G.active
@@ -17,7 +17,7 @@ export const PowerLevel = Game({
     draftReserve: (G, Card) => {
       G.deck.pop(Card);
       G.reserve.push(Card);
-    }
+  },
 
     playCard: (G, Card) => {
       // TODO: This move will allow a player to select a card.
@@ -32,11 +32,11 @@ export const PowerLevel = Game({
 
     turnOrder: TurnOrder.DEFAULT,
 
-    endGameIf: (G, ctx) => {
-      if (IsWinner(G, ctx.currentPlayer)) {
-        return ctx.currentPlayer;
-      }
-    },
+    // endGameIf: (G, ctx) => {
+    //   if (IsWinner(G, ctx.currentPlayer)) {
+    //     return ctx.currentPlayer;
+    //   }
+    // },
 
     phases: {
       draft: { // players draft 5 active cards, 3 reserve
@@ -53,3 +53,5 @@ export const PowerLevel = Game({
     },
   },
 });
+
+export default PowerLevel;

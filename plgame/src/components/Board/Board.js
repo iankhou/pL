@@ -1,6 +1,6 @@
 import React from "react";
 
-class PowerLevelBoard extends React.Component {
+class Board extends React.Component {
   onClick(id) {
     if (this.isActive(id)) {
       // Check if card is greyed out
@@ -10,4 +10,4 @@ class PowerLevelBoard extends React.Component {
   }
 }
 
-export default PowerLevelBoard;
+export default Board;

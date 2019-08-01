@@ -1,10 +1,10 @@
 import { Client } from "boardgame.io/react";
-import { PowerLevel } from "./Game";
-import PowerLevelBoard from "./Board";
+import { PowerLevel } from "../PowerLevel";
+import { Board } from "../Board";
 
 const PowerLevelClient = Client({
   game: PowerLevel,
-  board: PowerLevelBoard,
+  board: Board,
   multiplayer: { local: true }
 });
 
