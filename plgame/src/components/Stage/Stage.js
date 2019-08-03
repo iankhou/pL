@@ -1,7 +1,15 @@
 import React from "react";
-import { Reserve } from "../Reserve";
+import { Active } from "../Active";
 
-const Stage = () => {
+const Stage = props => {
   // must take an array of Cards as a parameter
-  return <div>Stage</div>;
+  console.log(props);
+  return (
+    <div>
+      <Active player={props.otherPlayer}/>
+      <Active player={props.currentPlayer}/>
+    </div>
+  );
 };
+
+export default Stage;
