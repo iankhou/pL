@@ -1,0 +1,23 @@
+.component {
+  border: 0.6em black solid;
+}
+
+.stage {
+  /* position: relative;
+  top: 20em;
+  bottom: 1em;
+  width: 100%; */
+}
+
+/* #enemy,
+#friendly {
+  position: absolute;
+} */
+
+/* #enemy {
+  top: 0;
+}
+
+#friendly {
+  bottom: 0;
+} */

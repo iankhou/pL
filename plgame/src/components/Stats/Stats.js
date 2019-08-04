@@ -5,7 +5,7 @@ const Stats = ({ person }) => {
   // draws info from a stat object
   return (
     <div>
-      <div className="content">
+      <div className="stat-content">
         <ul>
           <li>IQ: {person.iq}</li>
           <li>EQ: {person.eq}</li>
