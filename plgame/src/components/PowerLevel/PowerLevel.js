@@ -1,8 +1,18 @@
 import { Game } from "boardgame.io/core";
 import { TurnOrder } from "boardgame.io/dist/core";
 
+// check if a player has no cards left
+const isGameEnd = (G) => (!G.active.length && !G.reserve.length) ? true : false;
+
+const pullFromDB = () => null;
+
 const PowerLevel = Game({
-  setup: () => ({ deck: 5, hand: 0 }),
+  setup: () => ({
+     deck: pullFromDB(),
+     active: [],
+     reserve: [],
+     currCard: null
+   }),
   // TODO: Initialize array of Cards in G.deck
   // TODO: Initialize array of Cards in G.active
   // TODO: Initialize array of Cards in G.reserve
@@ -11,11 +21,16 @@ const PowerLevel = Game({
   moves: {
     draftCard: (G, Card) => {
       G.deck.pop(Card);
+      G.squad.push(Card);
+    },
+
+    placeActive: (G, Card) => {
+      G.squad.pop(Card);
       G.active.push(Card);
     },
 
-    draftReserve: (G, Card) => {
-      G.deck.pop(Card);
+    placeReserve: (G, Card) => {
+      G.squad.pop(Card);
       G.reserve.push(Card);
   },
 
@@ -32,15 +47,22 @@ const PowerLevel = Game({
 
     turnOrder: TurnOrder.DEFAULT,
 
-    // endGameIf: (G, ctx) => {
-    //   if (IsWinner(G, ctx.currentPlayer)) {
-    //     return ctx.currentPlayer;
-    //   }
-    // },
+    endGameIf: (G, ctx) => {
+      if (isGameEnd(G)) {
+        // returns the loser
+        return { loser: ctx.currentPlayer };
+      }
+    },
 
     phases: {
-      draft: { // players draft 5 active cards, 3 reserve
+      draft: { // players draft 8 cards into their squad
         allowedMoves: ['draftActive', 'draftReserve'],
+        endPhaseIf: G => G.squad >= 8,
+        next: 'organize',
+      },
+
+      organize: { // players place 5 cards into active and 3 cards into reserve
+        allowedMoves: ['placeActive', 'placeReserve'],
         endPhaseIf: G => G.active >= 5 && G.reserve >= 3,
         next: 'play',
       },
