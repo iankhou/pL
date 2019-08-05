@@ -3,9 +3,13 @@ import React from "react";
 import { Client } from "boardgame.io/react";
 import { PowerLevel } from "../PowerLevel";
 import { Board } from "../Board";
-import { Card } from "../Card";
-import { Active } from "../Active";
-import { Stage } from "../Stage";
+import {
+  Poisoned,
+  Burned,
+  Stunned,
+  Trapped,
+  Silenced
+} from "../Status/Effects";
 
 const PowerLevelClient = Client({
   game: PowerLevel,
@@ -16,6 +20,7 @@ const PowerLevelClient = Client({
 // EXAMPLE OBJECT
 const JoWingSy = {
   name: "Jo Wing Sy",
+  mhp: 240,
   hp: 240,
   atk: 27,
   iq: 10,
@@ -32,11 +37,12 @@ const JoWingSy = {
   ab: "Lecture: Traps one target and poison it for 3 turns",
   ult:
     "Grounded: Traps all active enemy cards for 3 turns and poison them for 5 turns",
-  status: ["silenced", "poisoned"]
+  status: [new Silenced(), new Poisoned()]
 };
 
 const GordenChen = {
   name: "Gorden Chen",
+  mhp: 220,
   hp: 220,
   atk: 27,
   iq: 9,
@@ -53,24 +59,33 @@ const GordenChen = {
   ult:
     "Safety Regulations: All friendly active cards recieve a shield worth 20% of his current HP until the end of your next turn",
 
-  status: ["trapped", "stunned", "burned"]
+  status: [new Trapped(), new Stunned(), new Burned()]
 };
 
-const friendly = [GordenChen, GordenChen, GordenChen, GordenChen, GordenChen];
-const enemy = [JoWingSy, JoWingSy, JoWingSy, JoWingSy, JoWingSy];
+const friendly_active = [
+  GordenChen,
+  GordenChen,
+  GordenChen,
+  GordenChen,
+  GordenChen
+];
+const friendly_reserve = [GordenChen, GordenChen, GordenChen];
+const enemy_active = [JoWingSy, JoWingSy, JoWingSy, JoWingSy, JoWingSy];
+const enemy_reserve = [JoWingSy, JoWingSy, JoWingSy];
 
+const characters = {
+  player1: {
+    active: friendly_active,
+    reserve: friendly_reserve
+  },
+  player2: {
+    active: enemy_active,
+    reserve: enemy_reserve
+  }
+};
 const App = () => (
   <div>
-    {/* Player 0
-    <PowerLevelClient playerID="0" />
-    <br />
-    Player 1
-    <PowerLevelClient playerID="1" /> */}
-    {/* <div className="active">
-      <Card person={JoWingSy} />
-      <Card person={GordenChen} />
-    </div> */}
-    <Stage friendly={friendly} enemy={enemy} />
+    <Board players={characters} />
   </div>
 );
 

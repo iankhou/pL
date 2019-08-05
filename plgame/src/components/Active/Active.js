@@ -1,18 +1,17 @@
-
 import React from "react";
 import { Card } from "../Card";
 import "./Active.css";
 
 class Active extends React.Component {
   render() {
-    const { pArray } = this.props;
+    const { cArray } = this.props;
     return (
-      <div>
-        <Card person={pArray[0]} />
-        <Card person={pArray[1]} />
-        <Card person={pArray[2]} />
-        <Card person={pArray[3]} />
-        <Card person={pArray[4]} />
+      <div className="active-content">
+        <Card person={cArray[0]} />
+        <Card person={cArray[1]} />
+        <Card person={cArray[2]} />
+        <Card person={cArray[3]} />
+        <Card person={cArray[4]} />
       </div>
     );
   }

@@ -8,11 +8,14 @@ class Stage extends React.Component {
     const { friendly, enemy } = this.props;
     return (
       <div className="component">
-        <div id="enemy">
-          <Active pArray={enemy} />
-        </div>
-        <div id="friendly">
-          <Active pArray={friendly} />
+        <div className="stage-content">
+          <div id="enemy">
+            <Active cArray={enemy} />
+          </div>
+          <div id="versus">VERSUS</div>
+          <div id="friendly">
+            <Active cArray={friendly} />
+          </div>
         </div>
       </div>
     );
