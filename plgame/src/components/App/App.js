@@ -3,9 +3,13 @@ import React from "react";
 import { Client } from "boardgame.io/react";
 import { PowerLevel } from "../PowerLevel";
 import { Board } from "../Board";
-import { Card } from "../Card";
-import { Active } from "../Active";
-import { Stage } from "../Stage";
+import {
+  Poisoned,
+  Burned,
+  Stunned,
+  Trapped,
+  Silenced
+} from "../Status/Effects";
 
 const PowerLevelClient = Client({
   game: PowerLevel,
@@ -16,6 +20,7 @@ const PowerLevelClient = Client({
 // EXAMPLE OBJECT
 const JoWingSy = {
   name: "Jo Wing Sy",
+  mhp: 240,
   hp: 240,
   atk: 27,
   iq: 10,
@@ -32,11 +37,12 @@ const JoWingSy = {
   ab: "Lecture: Traps one target and poison it for 3 turns",
   ult:
     "Grounded: Traps all active enemy cards for 3 turns and poison them for 5 turns",
-  status: ["silenced", "poisoned"]
+  status: [new Silenced(), new Poisoned()]
 };
 
 const GordenChen = {
   name: "Gorden Chen",
+  mhp: 220,
   hp: 220,
   atk: 27,
   iq: 9,
@@ -53,7 +59,7 @@ const GordenChen = {
   ult:
     "Safety Regulations: All friendly active cards recieve a shield worth 20% of his current HP until the end of your next turn",
 
-  status: ["trapped", "stunned", "burned"]
+  status: [new Trapped(), new Stunned(), new Burned()]
 };
 
 const friendly_active = [

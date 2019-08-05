@@ -15,35 +15,35 @@
   text-transform: capitalize;
 }
 
-.poisoned {
+.poison {
   background: gold;
   border: 0.15em purple solid;
   border-radius: 0.5em;
   order: 3;
 }
 
-.burned {
+.burn {
   background: red;
   border: 0.15em orange solid;
   border-radius: 0.5em;
   order: 4;
 }
 
-.stunned {
+.stun {
   background: tan;
   border: 0.15em grey solid;
   border-radius: 0.5em;
   order: 0;
 }
 
-.trapped {
+.trap {
   background: lightgreen;
   border: 0.15em green solid;
   border-radius: 0.5em;
   order: 2;
 }
 
-.silenced {
+.silence {
   background: black;
   border: 0.15em lightsteelblue solid;
   border-radius: 0.5em;

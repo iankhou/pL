@@ -7,8 +7,8 @@ const Status = ({ status }) => {
       <div className="content-bar">
         {status.map((value, index) => {
           return (
-            <div className={value} key={index}>
-              {value}
+            <div className={value.name} key={index}>
+              {value.name}
             </div>
           );
         })}
