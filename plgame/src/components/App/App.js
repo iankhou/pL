@@ -59,7 +59,7 @@ const GordenChen = {
   ult:
     "Safety Regulations: All friendly active cards recieve a shield worth 20% of his current HP until the end of your next turn",
 
-  status: [new Trapped(), new Stunned(), new Burned()]
+  status: new Set([new Trapped(), new Stunned(), new Burned()])
 };
 
 const friendly_active = [

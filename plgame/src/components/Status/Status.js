@@ -5,7 +5,7 @@ const Status = ({ status }) => {
   return (
     <div>
       <div className="content-bar">
-        {status.map((value, index) => {
+        {[...status].map((value, index) => {
           return (
             <div className={value.name} key={index}>
               {value.name}

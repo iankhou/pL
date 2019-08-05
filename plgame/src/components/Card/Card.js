@@ -1,9 +1,95 @@
 import React from "react";
-import { Stats } from "../Stats";
 import { Status } from "../Status";
+import {
+  Poisoned,
+  Burned,
+  Stunned,
+  Trapped,
+  Silenced
+} from "../Status/Effects";
 import "./Card.css";
 
 class Card extends React.Component {
+  damage(amount) {
+    const { person } = this.props;
+    if (amount > person.shield) {
+      person.hp -= amount - person.shield;
+      person.shield = 0;
+    } else {
+      person.shield -= amount;
+    }
+  }
+
+  heal(amount) {
+    const { person } = this.props;
+    if (amount <= 0) {
+      throw console.error(
+        `negative health applied to heal method on ${person.name}`
+      );
+    }
+    person.hp += amount;
+  }
+
+  addShield(amount) {
+    const { person } = this.props;
+    if (amount <= 0) {
+      throw console.error(
+        `negative amount applied to shield method on ${person.name}`
+      );
+    }
+    person.shield += amount;
+  }
+
+  poison() {
+    this.props.person.Status.forEach(element => {
+      if (typeof element === Poisoned) {
+        element = new Poisoned();
+        return;
+      }
+    });
+    this.props.person.Status.add(new Poisoned());
+  }
+
+  burn() {
+    this.props.person.Status.forEach(element => {
+      if (typeof element === Burned) {
+        element = new Burned();
+        return;
+      }
+    });
+    this.props.person.Status.add(new Burned());
+  }
+
+  stun() {
+    this.props.person.Status.forEach(element => {
+      if (typeof element === Stunned) {
+        element = new Stunned();
+        return;
+      }
+    });
+    this.props.person.Status.add(new Stunned());
+  }
+
+  trap() {
+    this.props.person.Status.forEach(element => {
+      if (typeof element === Trapped) {
+        element = new Trapped();
+        return;
+      }
+    });
+    this.props.person.Status.add(new Trapped());
+  }
+
+  silence() {
+    this.props.person.Status.forEach(element => {
+      if (typeof element === Silenced) {
+        element = new Silenced();
+        return;
+      }
+    });
+    this.props.person.Status.add(new Silenced());
+  }
+
   render() {
     const { person } = this.props;
     return (
