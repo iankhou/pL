@@ -33,14 +33,14 @@
   background: tan;
   border: 0.15em grey solid;
   border-radius: 0.5em;
-  order: 2;
+  order: 0;
 }
 
 .trapped {
   background: lightgreen;
   border: 0.15em green solid;
   border-radius: 0.5em;
-  order: 1;
+  order: 2;
 }
 
 .silenced {
@@ -48,5 +48,5 @@
   border: 0.15em lightsteelblue solid;
   border-radius: 0.5em;
   color: white;
-  order: 0;
+  order: 1;
 }

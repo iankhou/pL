@@ -56,21 +56,30 @@ const GordenChen = {
   status: ["trapped", "stunned", "burned"]
 };
 
-const friendly = [GordenChen, GordenChen, GordenChen, GordenChen, GordenChen];
-const enemy = [JoWingSy, JoWingSy, JoWingSy, JoWingSy, JoWingSy];
+const friendly_active = [
+  GordenChen,
+  GordenChen,
+  GordenChen,
+  GordenChen,
+  GordenChen
+];
+const friendly_reserve = [GordenChen, GordenChen, GordenChen];
+const enemy_active = [JoWingSy, JoWingSy, JoWingSy, JoWingSy, JoWingSy];
+const enemy_reserve = [JoWingSy, JoWingSy, JoWingSy];
 
+const characters = {
+  player1: {
+    active: friendly_active,
+    reserve: friendly_reserve
+  },
+  player2: {
+    active: enemy_active,
+    reserve: enemy_reserve
+  }
+};
 const App = () => (
   <div>
-    {/* Player 0
-    <PowerLevelClient playerID="0" />
-    <br />
-    Player 1
-    <PowerLevelClient playerID="1" /> */}
-    {/* <div className="active">
-      <Card person={JoWingSy} />
-      <Card person={GordenChen} />
-    </div> */}
-    <Stage friendly={friendly} enemy={enemy} />
+    <Board players={characters} />
   </div>
 );
 
