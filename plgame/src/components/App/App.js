@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Client } from "boardgame.io/react";
-import { PowerLevel } from "../PowerLevel";
+import { PowerLevel } from "../../PowerLevel";
 import { Board } from "../Board";
 import {
   Poisoned,
@@ -11,11 +11,11 @@ import {
   Silenced
 } from "../Status/Effects";
 
-const PowerLevelClient = Client({
-  game: PowerLevel,
-  board: Board,
-  multiplayer: { local: true }
-});
+// const PowerLevelClient = Client({
+//   game: PowerLevel,
+//   board: Board,
+//   multiplayer: { local: true }
+// });
 
 // EXAMPLE OBJECT
 const JoWingSy = {

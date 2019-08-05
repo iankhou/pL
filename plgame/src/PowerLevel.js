@@ -42,23 +42,23 @@ const PowerLevel = Game({
       if (G.selectedCard === OCard) {
         TCard.hp -= OCard.attack;
       } else {
-        return INVALID_MOVE;
+        return 'INVALID_MOVE';
       }
     },
 
     useSpecial: (G, Card, options) => {
       if (G.selectedCard === Card) {
-        Card.special(options);
+        // Card.special(options);
       } else {
-        return INVALID_MOVE;
+        return 'INVALID_MOVE';
       }
     },
 
     useUltimate: (G, Card, otions) => {
       if (G.selectedCard === Card) {
-        Card.ultimate(options);
+        // Card.ultimate(options);
       } else {
-        return INVALID_MOVE;
+        return 'INVALID_MOVE';
       }
     },
 
