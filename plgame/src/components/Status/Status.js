@@ -1,20 +1,20 @@
 import React from "react";
+import "./Status.css";
 
-const Stats = props => {
-  // draws info from a stat object
+const Status = ({ status }) => {
   return (
     <div>
-      <ul>
-        <li>IQ: {props.iq}</li>
-        <li>EQ: {props.eq}</li>
-        <li>Adaptability: {props.adby}</li>
-        <li>Social: {props.soc}</li>
-        <li>Cleanliness: {props.cln}</li>
-        <li>Income: {props.inc}</li>
-        <li>Power: {props.pow}</li>
-      </ul>
+      <div className="content-bar">
+        {status.map((value, index) => {
+          return (
+            <div className={value.name} key={index}>
+              {value.name}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
-export default Stats;
+export default Status;

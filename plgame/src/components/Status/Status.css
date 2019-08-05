@@ -1,0 +1,52 @@
+.content-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-left: 0.5em;
+  font-size: 0.7em;
+  font-style: italic;
+}
+
+.content-bar div {
+  margin: 0.03em;
+  padding-top: 0.1em;
+  padding-right: 0.2em;
+  padding-bottom: 0.1em;
+  padding-left: 0.1em;
+  text-transform: capitalize;
+}
+
+.poison {
+  background: gold;
+  border: 0.15em purple solid;
+  border-radius: 0.5em;
+  order: 3;
+}
+
+.burn {
+  background: red;
+  border: 0.15em orange solid;
+  border-radius: 0.5em;
+  order: 4;
+}
+
+.stun {
+  background: tan;
+  border: 0.15em grey solid;
+  border-radius: 0.5em;
+  order: 0;
+}
+
+.trap {
+  background: lightgreen;
+  border: 0.15em green solid;
+  border-radius: 0.5em;
+  order: 2;
+}
+
+.silence {
+  background: black;
+  border: 0.15em lightsteelblue solid;
+  border-radius: 0.5em;
+  color: white;
+  order: 1;
+}

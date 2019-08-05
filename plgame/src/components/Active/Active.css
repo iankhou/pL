@@ -1,0 +1,4 @@
+.active-content {
+  display: flex;
+  flex-wrap: nowrap;
+}

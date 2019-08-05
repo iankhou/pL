@@ -1,8 +1,18 @@
 import React from "react";
+import { Card } from "../Card";
+import "./Reserve.css";
 
-const Reserve = props => {
-  // must take an array of cards as a parameter
-  return <div>Reserve: {props.player}</div>;
-};
+class Reserve extends React.Component {
+  render() {
+    const { cArray } = this.props;
+    return (
+      <div className="reserve-content">
+        <Card person={cArray[0]} />
+        <Card person={cArray[1]} />
+        <Card person={cArray[2]} />
+      </div>
+    );
+  }
+}
 
 export default Reserve;

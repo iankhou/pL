@@ -1,6 +1,6 @@
 import React from "react";
-import { Stage } from '../Stage';
-import { Reserve } from '../Reserve';
+import { Stage } from "../Stage";
+import { Reserve } from "../Reserve";
 
 class Board extends React.Component {
   onClick(id) {
@@ -16,9 +16,12 @@ class Board extends React.Component {
     const { players } = this.props;
     return (
       <div>
-        <Reserve player={players.otherPlayer} />
-        <Stage currentPlayer={players.currentPlayer} otherPlayer={players.otherPlayer} />
-        <Reserve player={players.currentPlayer}/>
+        <Reserve cArray={players.player2.reserve} />
+        <Stage
+          friendly={players.player1.active}
+          enemy={players.player2.active}
+        />
+        <Reserve cArray={players.player1.reserve} />
       </div>
     );
   }

@@ -1,0 +1,16 @@
+.component {
+  border: 0.6em black solid;
+  display: inline-block;
+}
+
+.stage-content {
+  text-align: center;
+  padding: 1em;
+}
+
+#versus {
+  text-align: center;
+  font-size: 5em;
+  color: red;
+  margin: 1em 0 1em 0;
+}
