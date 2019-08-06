@@ -2,7 +2,7 @@ import { Game } from "boardgame.io/core";
 import { TurnOrder } from "boardgame.io/dist/core";
 
 // check if a player has no cards left
-const isGameEnd = (G) => (!G.active.length && !G.reserve.length) ? true : false;
+const isGameEnd = G => (!G.active.length && !G.reserve.length) ? true : false;
 
 const pullFromDB = () => null;
 
@@ -41,22 +41,6 @@ const PowerLevel = Game({
     useAttack: (G, OCard, TCard) => {
       if (G.selectedCard === OCard) {
         TCard.hp -= OCard.attack;
-      } else {
-        return 'INVALID_MOVE';
-      }
-    },
-
-    useSpecial: (G, Card, options) => {
-      if (G.selectedCard === Card) {
-        // Card.special(options);
-      } else {
-        return 'INVALID_MOVE';
-      }
-    },
-
-    useUltimate: (G, Card, otions) => {
-      if (G.selectedCard === Card) {
-        // Card.ultimate(options);
       } else {
         return 'INVALID_MOVE';
       }
