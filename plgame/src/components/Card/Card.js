@@ -24,7 +24,7 @@ class Card extends React.Component {
     const { person } = this.props;
     if (amount <= 0) {
       throw console.error(
-        `negative health applied to heal method on ${person.name}`
+        `negative or zero health applied to heal method on ${person.name}`
       );
     }
     person.hp += amount;
@@ -34,10 +34,26 @@ class Card extends React.Component {
     const { person } = this.props;
     if (amount <= 0) {
       throw console.error(
-        `negative amount applied to shield method on ${person.name}`
+        `negative or zero amount applied to addShield method on ${person.name}`
       );
     }
     person.shield += amount;
+  }
+
+  reduceUltimate(amount) {
+    const { person } = this.props;
+    if (amount <= 0) {
+      throw console.error(
+        `negative or zero amount applied to reduceUltimate method on ${
+          person.name
+        }`
+      );
+    }
+    if (amount > person.ult) {
+      person.ult = 0;
+    } else {
+      person.ult -= amount;
+    }
   }
 
   poison() {
@@ -89,6 +105,8 @@ class Card extends React.Component {
     });
     this.props.person.Status.add(new Silenced());
   }
+
+  componentDidMount() {}
 
   render() {
     const { person } = this.props;

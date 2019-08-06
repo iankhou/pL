@@ -25,7 +25,7 @@ const JoWingSy = {
   atk: 27,
   iq: 10,
   eq: 7,
-  aby: 10,
+  adby: 10,
   soc: 7,
   cln: 8,
   inc: 9,
