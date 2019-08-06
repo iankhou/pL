@@ -9,7 +9,7 @@ const Stats = ({ person }) => {
         <ul>
           <li>IQ: {person.iq}</li>
           <li>EQ: {person.eq}</li>
-          <li>Adaptability: {person.aby}</li>
+          <li>Adaptability: {person.adby}</li>
           <li>Social: {person.soc}</li>
           <li>Cleanliness: {person.cln}</li>
           <li>Income: {person.inc}</li>

@@ -25,7 +25,7 @@ const JoWingSy = {
   atk: 27,
   iq: 10,
   eq: 7,
-  aby: 10,
+  adby: 10,
   soc: 7,
   cln: 8,
   inc: 9,
@@ -59,7 +59,7 @@ const GordenChen = {
   ult:
     "Safety Regulations: All friendly active cards recieve a shield worth 20% of his current HP until the end of your next turn",
 
-  status: [new Trapped(), new Stunned(), new Burned()]
+  status: new Set([new Trapped(), new Stunned(), new Burned()])
 };
 
 const friendly_active = [
