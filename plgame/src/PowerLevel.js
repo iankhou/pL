@@ -2,7 +2,7 @@ import { Game } from "boardgame.io/core";
 import { TurnOrder } from "boardgame.io/dist/core";
 
 // check if a player has no cards left
-const isGameEnd = (G) => (!G.active.length && !G.reserve.length) ? true : false;
+const isGameEnd = G => (!G.active.length && !G.reserve.length) ? true : false;
 
 const pullFromDB = () => null;
 
@@ -32,14 +32,23 @@ const PowerLevel = Game({
     placeReserve: (G, Card) => {
       G.squad.pop(Card);
       G.reserve.push(Card);
-  },
-
-    playCard: (G, Card) => {
-      // TODO: This move will allow a player to select a card.
-      // Thereafter, the player will be able to activate attacks,
-      // abilities, or switch with reserve card
-      G.currCard = Card;
     },
+
+    selectCard: (G, Card) => {
+      G.selectedCard = Card;
+    },
+
+    useAttack: (G, OCard, TCard) => {
+      if (G.selectedCard === OCard) {
+        TCard.hp -= OCard.attack;
+      } else {
+        return 'INVALID_MOVE';
+      }
+    },
+
+    endTurn: (G) => {
+      G.finished = true;
+    }
   },
 
   flow: {
@@ -68,8 +77,11 @@ const PowerLevel = Game({
       },
 
       play: {
-        allowedMoves: ['playCard', 'skipTurn'],
-        endPhaseIf: G => G.active <=0,
+        allowedMoves: ['playCard', 'endTurn'],
+        onTurnEnd: (G) => {
+          G.active = G.active.filter(card => card.hp > 0);
+        },
+        endPhaseIf: G => G.finished === true,
         next: 'gameOver',
       },
     },
