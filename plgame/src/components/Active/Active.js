@@ -7,11 +7,11 @@ class Active extends React.Component {
     const { cArray } = this.props;
     return (
       <div className="active-content">
-        <Card person={cArray[0]} />
-        <Card person={cArray[1]} />
-        <Card person={cArray[2]} />
-        <Card person={cArray[3]} />
-        <Card person={cArray[4]} />
+        <Card character={cArray[0]} />
+        <Card character={cArray[1]} />
+        <Card character={cArray[2]} />
+        <Card character={cArray[3]} />
+        <Card character={cArray[4]} />
       </div>
     );
   }
