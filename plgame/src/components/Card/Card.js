@@ -11,125 +11,158 @@ import "./Card.css";
 
 class Card extends React.Component {
   damageSelf(amount) {
-    const { person } = this.props;
-    if (amount > person.shield) {
-      person.hp -= amount - person.shield;
-      person.shield = 0;
+    const { character } = this.props;
+    if (amount > character.shield) {
+      character.hp -= amount - character.shield;
+      character.shield = 0;
     } else {
-      person.shield -= amount;
+      character.shield -= amount;
     }
   }
 
   healSelf(amount) {
-    const { person } = this.props;
+    const { character } = this.props;
     if (amount <= 0) {
       throw console.error(
-        `negative or zero health applied to heal method on ${person.name}`
+        `negative or zero health applied to heal method on ${character.name}`
       );
     }
-    person.hp += amount;
+    character.hp += amount;
   }
 
   sheildSelf(amount) {
-    const { person } = this.props;
+    const { character } = this.props;
     if (amount <= 0) {
       throw console.error(
-        `negative or zero amount applied to addShield method on ${person.name}`
+        `negative or zero amount applied to addShield method on ${character.name}`
       );
     }
-    person.shield += amount;
+    character.shield += amount;
   }
 
   reduceUltimateSelf(amount) {
-    const { person } = this.props;
+    const { character } = this.props;
     if (amount <= 0) {
       throw console.error(
-        `negative or zero amount applied to reduceUltimate method on ${person.name}`
+        `negative or zero amount applied to reduceUltimate method on ${character.name}`
       );
     }
-    if (amount > person.ult) {
-      person.ult = 0;
+    if (amount > character.ult) {
+      character.ult = 0;
     } else {
-      person.ult -= amount;
+      character.ult -= amount;
     }
   }
 
   poisonSelf() {
-    this.props.person.Status.forEach(element => {
+    this.props.character.Status.forEach(element => {
       if (typeof element === Poisoned) {
         element = new Poisoned();
         return;
       }
     });
-    this.props.person.Status.add(new Poisoned());
+    this.props.character.Status.add(new Poisoned());
   }
 
   burnSelf() {
-    this.props.person.Status.forEach(element => {
+    this.props.character.Status.forEach(element => {
       if (typeof element === Burned) {
         element = new Burned();
         return;
       }
     });
-    this.props.person.Status.add(new Burned());
+    this.props.character.Status.add(new Burned());
   }
 
   stunSelf() {
-    this.props.person.Status.forEach(element => {
+    this.props.character.Status.forEach(element => {
       if (typeof element === Stunned) {
         element = new Stunned();
         return;
       }
     });
-    this.props.person.Status.add(new Stunned());
+    this.props.character.Status.add(new Stunned());
   }
 
   trapSelf() {
-    this.props.person.Status.forEach(element => {
+    this.props.character.Status.forEach(element => {
       if (typeof element === Trapped) {
         element = new Trapped();
         return;
       }
     });
-    this.props.person.Status.add(new Trapped());
+    this.props.character.Status.add(new Trapped());
   }
 
   silenceSelf() {
-    this.props.person.Status.forEach(element => {
+    this.props.character.Status.forEach(element => {
       if (typeof element === Silenced) {
         element = new Silenced();
         return;
       }
     });
-    this.props.person.Status.add(new Silenced());
+    this.props.character.Status.add(new Silenced());
   }
 
   // moves on other cards
 
-  // initialize
+  // initialize instance variables such as powerLevel, hp, attack, armor in state
+  constructor(props) {
+    super(props);
+    const { character } = this.props;
+    const {
+      iq,
+      eq,
+      adaptability,
+      social,
+      cleanliness,
+      income,
+      type
+    } = character;
+
+    const powerLevel = Math.floor(
+      (iq + eq + adaptability + social + cleanliness + income) * (5 / 3)
+    );
+    const attack = iq + adaptability + social;
+    const health = eq + cleanliness + income;
+    const maxHp = health * 10;
+    const hp = maxHp;
+
+    const armor = type === "tank" ? 10 : 0;
+
+    this.state = {
+      powerLevel,
+      attack,
+      health,
+      maxHp,
+      hp,
+      armor
+    };
+  }
+
   componentDidMount() {}
 
   render() {
-    const { person } = this.props;
+    const { character } = this.props;
     return (
       <div className="content">
         <div className="card-body">
           <div className="card-header">
-            <span id="name">{person.name}</span>
+            <span id="name">{character.name}</span>
             <span id="hp">
-              <strong>{person.hp}</strong>
+              <strong>{character.hp}</strong>
             </span>
           </div>
 
-          <Status status={person.status} />
-          {/* <Stats person={person} /> */}
+          <Status status={character.status} />
+          {/* <Stats character={character} /> */}
           <div className="image">
-            <img src={person.img} />
+            <img src={character.img} />
           </div>
           <div className="description">
-            <div>{person.tt}</div>
-            <div>{person.ab}</div>
-            <div>{person.ult}</div>
+            <div>{character.tt}</div>
+            <div>{character.ab}</div>
+            <div>{character.ult}</div>
           </div>
         </div>
       </div>
