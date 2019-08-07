@@ -106,6 +106,7 @@ class Card extends React.Component {
 
   // moves on other cards
 
+  // initialize
   componentDidMount() {}
 
   render() {
