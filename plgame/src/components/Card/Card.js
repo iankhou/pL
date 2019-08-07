@@ -106,10 +106,6 @@ class Card extends React.Component {
   }
 
   // moves on other cards
-  attack(Card) {
-    damageOther(Card, this.props.attack);
-  }
-
   damageOther(Card, amount) {
     Card.damageSelf(amount);
   }

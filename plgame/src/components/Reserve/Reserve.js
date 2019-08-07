@@ -7,9 +7,9 @@ class Reserve extends React.Component {
     const { cArray } = this.props;
     return (
       <div className="reserve-content">
-        <Card person={cArray[0]} />
-        <Card person={cArray[1]} />
-        <Card person={cArray[2]} />
+        <Card character={cArray[0]} />
+        <Card character={cArray[1]} />
+        <Card character={cArray[2]} />
       </div>
     );
   }
