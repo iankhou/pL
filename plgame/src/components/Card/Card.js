@@ -142,6 +142,23 @@ class Card extends React.Component {
     Card.silenceSelf(turnsRemaining);
   }
 
+  // handle hover and selection of card
+  toggleHoverState = () => {
+    return { hovered: !this.state.hovered };
+  };
+
+  onHover = () => {
+    this.setState(this.toggleHoverState());
+  };
+
+  toggleSelectState = () => {
+    return { selected: !this.state.selected };
+  };
+
+  onSelect = () => {
+    this.setState(this.toggleSelectState());
+  };
+
   // initialize instance variables such as powerLevel, hp, attack, armor in state
   constructor(props) {
     super(props);
@@ -172,7 +189,9 @@ class Card extends React.Component {
       health,
       maxHp,
       hp,
-      armor
+      armor,
+      selected: false,
+      hovered: false
     };
   }
 
@@ -181,7 +200,12 @@ class Card extends React.Component {
   render() {
     const { character } = this.props;
     return (
-      <div className="content">
+      <div
+        className="content"
+        onMouseEnter={this.onHover}
+        onMouseLeave={this.onHover}
+        onClick={this.onSelect}
+      >
         <div className="card-body">
           <div className="card-header">
             <span id="name">{character.name}</span>
