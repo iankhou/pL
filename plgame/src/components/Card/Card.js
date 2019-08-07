@@ -10,6 +10,7 @@ import {
 import "./Card.css";
 
 class Card extends React.Component {
+  // moves on self
   damageSelf(amount) {
     const { character } = this.props;
     if (amount > character.shield) {
@@ -54,27 +55,27 @@ class Card extends React.Component {
     }
   }
 
-  poisonSelf() {
+  poisonSelf(turnsRemaining) {
     this.props.character.Status.forEach(element => {
       if (typeof element === Poisoned) {
         element = new Poisoned();
         return;
       }
     });
-    this.props.character.Status.add(new Poisoned());
+    this.props.character.Status.add(new Poisoned(turnsRemaining));
   }
 
-  burnSelf() {
+  burnSelf(turnsRemaining) {
     this.props.character.Status.forEach(element => {
       if (typeof element === Burned) {
-        element = new Burned();
+        element = new Burned(turnsRemaining);
         return;
       }
     });
     this.props.character.Status.add(new Burned());
   }
 
-  stunSelf() {
+  stunSelf(turnsRemaining) {
     this.props.character.Status.forEach(element => {
       if (typeof element === Stunned) {
         element = new Stunned();
@@ -84,7 +85,7 @@ class Card extends React.Component {
     this.props.character.Status.add(new Stunned());
   }
 
-  trapSelf() {
+  trapSelf(turnsRemaining) {
     this.props.character.Status.forEach(element => {
       if (typeof element === Trapped) {
         element = new Trapped();
@@ -94,7 +95,7 @@ class Card extends React.Component {
     this.props.character.Status.add(new Trapped());
   }
 
-  silenceSelf() {
+  silenceSelf(turnsRemaining) {
     this.props.character.Status.forEach(element => {
       if (typeof element === Silenced) {
         element = new Silenced();
@@ -105,6 +106,45 @@ class Card extends React.Component {
   }
 
   // moves on other cards
+  attack(Card) {
+    damageOther(Card, this.props.attack);
+  }
+
+  damageOther(Card, amount) {
+    Card.damageSelf(amount);
+  }
+
+  healOther(Card, amount) {
+    Card.healSelf(amount);
+  }
+
+  shieldOther(Card, amount) {
+    Card.shieldSelf(amount);
+  }
+
+  reduceUltimateOther(Card, amount) {
+    Card.reduceUltimateSelf(amount);
+  }
+
+  poisonOther(Card, turnsRemaining) {
+    Card.poisonSelf(turnsRemaining);
+  }
+
+  burnOther(Card, turnsRemaining) {
+    Card.burnSelf(turnsRemaining);
+  }
+
+  stunOther(Card, turnsRemaining) {
+    Card.stunSelf(turnsRemaining);
+  }
+
+  trapOther(Card, turnsRemaining) {
+    Card.trapSelf(turnsRemaining);
+  }
+
+  silenceOther(Card, turnsRemaining) {
+    Card.silenceSelf(turnsRemaining);
+  }
 
   // initialize instance variables such as powerLevel, hp, attack, armor in state
   constructor(props) {
