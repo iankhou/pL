@@ -10,7 +10,7 @@ import {
 import "./Card.css";
 
 class Card extends React.Component {
-  damage(amount) {
+  damageSelf(amount) {
     const { person } = this.props;
     if (amount > person.shield) {
       person.hp -= amount - person.shield;
@@ -20,7 +20,7 @@ class Card extends React.Component {
     }
   }
 
-  heal(amount) {
+  healSelf(amount) {
     const { person } = this.props;
     if (amount <= 0) {
       throw console.error(
@@ -30,7 +30,7 @@ class Card extends React.Component {
     person.hp += amount;
   }
 
-  addShield(amount) {
+  sheildSelf(amount) {
     const { person } = this.props;
     if (amount <= 0) {
       throw console.error(
@@ -40,13 +40,11 @@ class Card extends React.Component {
     person.shield += amount;
   }
 
-  reduceUltimate(amount) {
+  reduceUltimateSelf(amount) {
     const { person } = this.props;
     if (amount <= 0) {
       throw console.error(
-        `negative or zero amount applied to reduceUltimate method on ${
-          person.name
-        }`
+        `negative or zero amount applied to reduceUltimate method on ${person.name}`
       );
     }
     if (amount > person.ult) {
@@ -56,7 +54,7 @@ class Card extends React.Component {
     }
   }
 
-  poison() {
+  poisonSelf() {
     this.props.person.Status.forEach(element => {
       if (typeof element === Poisoned) {
         element = new Poisoned();
@@ -66,7 +64,7 @@ class Card extends React.Component {
     this.props.person.Status.add(new Poisoned());
   }
 
-  burn() {
+  burnSelf() {
     this.props.person.Status.forEach(element => {
       if (typeof element === Burned) {
         element = new Burned();
@@ -76,7 +74,7 @@ class Card extends React.Component {
     this.props.person.Status.add(new Burned());
   }
 
-  stun() {
+  stunSelf() {
     this.props.person.Status.forEach(element => {
       if (typeof element === Stunned) {
         element = new Stunned();
@@ -86,7 +84,7 @@ class Card extends React.Component {
     this.props.person.Status.add(new Stunned());
   }
 
-  trap() {
+  trapSelf() {
     this.props.person.Status.forEach(element => {
       if (typeof element === Trapped) {
         element = new Trapped();
@@ -96,7 +94,7 @@ class Card extends React.Component {
     this.props.person.Status.add(new Trapped());
   }
 
-  silence() {
+  silenceSelf() {
     this.props.person.Status.forEach(element => {
       if (typeof element === Silenced) {
         element = new Silenced();
@@ -105,6 +103,8 @@ class Card extends React.Component {
     });
     this.props.person.Status.add(new Silenced());
   }
+
+  // moves on other cards
 
   componentDidMount() {}
 

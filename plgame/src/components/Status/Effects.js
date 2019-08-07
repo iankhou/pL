@@ -5,8 +5,8 @@ class Effect {
 }
 
 class Poisoned extends Effect {
-  constructor() {
-    super(5); // lasts 5 turns
+  constructor(turnsRemaining) {
+    super(turnsRemaining); // lasts 5 turns
     this.name = "poison";
   }
   action(Card) {
@@ -15,8 +15,8 @@ class Poisoned extends Effect {
 }
 
 class Burned extends Effect {
-  constructor() {
-    super(2); // lasts 2 turns
+  constructor(turnsRemaining = 2) {
+    super(turnsRemaining); // lasts 2 turns
     this.name = "burn";
   }
   action(Card) {
@@ -25,8 +25,8 @@ class Burned extends Effect {
 }
 
 class Stunned extends Effect {
-  constructor() {
-    super(1); // lasts 1 turn
+  constructor(turnsRemaining = 1) {
+    super(turnsRemaining); // lasts 1 turn
     this.name = "stun";
   }
   action(Card) {
@@ -35,8 +35,8 @@ class Stunned extends Effect {
 }
 
 class Trapped extends Effect {
-  constructor() {
-    super(3); // lasts 3 turns
+  constructor(turnsRemaining = 3) {
+    super(turnsRemaining); // lasts 3 turns
     this.name = "trap";
   }
   action(Card) {
@@ -45,8 +45,8 @@ class Trapped extends Effect {
 }
 
 class Silenced extends Effect {
-  constructor() {
-    super(1); // lasts 1 turn
+  constructor(turnsRemaining = 1) {
+    super(turnsRemaining); // lasts 1 turn
     this.name = "silence";
   }
   action(Card) {
