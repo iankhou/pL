@@ -6,9 +6,12 @@ class Draft extends React.component {
   render() {
     return (
       <div>
-        <Collection /> // enemy cards
-        <Collection /> // availible cards
-        <Collection /> // player cards
+        // enemy cards
+        <Collection characters={this.props.enemyCharacters} />
+        // availible
+        <Collection characters={this.props.availibleCharacters} />
+        // player cards
+        <Collection characters={this.props.playerCharacters} />
       </div>
     );
   }

@@ -13,6 +13,7 @@ const Collection = props => {
           hp={character.hp}
           attack={character.attack}
           armor={character.armor}
+          shiled={character.shield}
           trait={character.trait}
           ability={character.ability}
           ultimate={character.ultimate}
