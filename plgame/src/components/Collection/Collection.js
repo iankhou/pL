@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../Card';
+import { Card } from '../Card';
 
 const Collection = props => {
   const { characters } = props;
-  return (
+  return characters ? (
     <div>
       {characters.map(character => (
         <Card
@@ -21,6 +21,8 @@ const Collection = props => {
         />
       ))}
     </div>
+  ) : (
+    <div>No current cards.</div>
   );
 };
 

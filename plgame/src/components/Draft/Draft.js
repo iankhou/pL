@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Collection from '../Collection';
+import { Collection } from '../Collection';
 
-class Draft extends React.component {
+class Draft extends React.Component {
   render() {
     return (
       <div>
-        // enemy cards
+        {/* enemy cards */}
         <Collection characters={this.props.enemyCharacters} />
-        // availible
+        {/* undrafted cards */}
         <Collection characters={this.props.availibleCharacters} />
-        // player cards
+        {/* player cards */}
         <Collection characters={this.props.playerCharacters} />
       </div>
     );

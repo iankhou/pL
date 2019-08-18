@@ -1,7 +1,7 @@
 import { Game } from 'boardgame.io/core';
 import { TurnOrder } from 'boardgame.io/dist/core';
 import { PluginPlayer } from 'boardgame.io/plugins';
-import { characters } from './characters';
+// import { characters } from './characters';
 
 // check if a player has no cards left
 const isGameEnd = G => (!G.active.length && !G.reserve.length ? true : false);
@@ -15,8 +15,9 @@ const PowerLevel = Game({
   }),
   plugins: [PluginPlayer],
 
+  // TODO: Import a deck of characters
   setup: () => ({
-    deck: characters,
+    deck: null,
   }),
   // TODO: Initialize array of Cards in G.deck
   // TODO: Initialize array of Cards in G.active
@@ -69,6 +70,9 @@ const PowerLevel = Game({
     },
 
     phases: {
+      lobby: {
+        next: 'draft',
+      },
       draft: {
         // players draft 8 cards into their squad
         allowedMoves: ['draftActive', 'draftReserve'],
