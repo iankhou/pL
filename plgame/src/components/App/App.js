@@ -83,6 +83,7 @@ const characters = {
     reserve: enemy_reserve
   }
 };
+// Displays start here
 const App = () => (
   <div>
     <Board players={characters} />
