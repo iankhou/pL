@@ -1,6 +1,7 @@
 import leadershipAbility from "../abilities/leadership";
 import groundedUltimate from "../ultimates/grounded";
 
+//TODO: Refactor into class
 const gordonChen = {
   name: "Gorden Chen",
   iq: 9,
