@@ -1,7 +1,7 @@
 import { Game } from 'boardgame.io/core';
 import { TurnOrder } from 'boardgame.io/dist/core';
 import { PluginPlayer } from 'boardgame.io/plugins';
-// import { characters } from './characters';
+import characters from './characters';
 
 // check if a player has no cards left
 const isGameEnd = (G, ctx) =>
@@ -20,7 +20,7 @@ const PowerLevel = Game({
 
   // TODO: Import a deck of characters
   setup: () => ({
-    deck: null,
+    deck: characters,
   }),
 
   moves: {

@@ -7,18 +7,7 @@ const Collection = props => {
   return characters ? (
     <div>
       {characters.map(character => (
-        <Card
-          name={character.name}
-          description={character.description}
-          hp={character.hp}
-          attack={character.attack}
-          armor={character.armor}
-          shiled={character.shield}
-          trait={character.trait}
-          ability={character.ability}
-          ultimate={character.ultimate}
-          image={character.image}
-        />
+        <Card character={character} />
       ))}
     </div>
   ) : (

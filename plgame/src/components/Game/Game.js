@@ -18,7 +18,7 @@ class Game extends React.Component {
       case 'draft':
         return (
           <div>
-            <Draft />
+            <Draft availibleCharacters={this.props.G.deck} />
           </div>
         );
       case 'organize':
