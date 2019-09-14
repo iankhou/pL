@@ -4,7 +4,10 @@ import { PluginPlayer } from 'boardgame.io/plugins';
 // import { characters } from './characters';
 
 // check if a player has no cards left
-const isGameEnd = G => (!G.active.length && !G.reserve.length ? true : false);
+const isGameEnd = (G, ctx) =>
+  ctx.phase === 'play' &&
+  ((!G.players[0].active.length && !G.players[0].reserve.length) ||
+    (!G.players[1].active.length && !G.players[1].reserve.length));
 
 const PowerLevel = Game({
   playerSetup: playerID => ({
@@ -19,10 +22,6 @@ const PowerLevel = Game({
   setup: () => ({
     deck: null,
   }),
-  // TODO: Initialize array of Cards in G.deck
-  // TODO: Initialize array of Cards in G.active
-  // TODO: Initialize array of Cards in G.reserve
-  // TODO: Initialize currCard
 
   moves: {
     draftCard: (G, Card) => {
@@ -58,12 +57,12 @@ const PowerLevel = Game({
   },
 
   flow: {
-    startingPhase: 'draft',
+    startingPhase: 'lobby',
 
     turnOrder: TurnOrder.DEFAULT,
 
     endGameIf: (G, ctx) => {
-      if (isGameEnd(G)) {
+      if (isGameEnd(G, ctx)) {
         // returns the loser
         return { loser: ctx.currentPlayer };
       }

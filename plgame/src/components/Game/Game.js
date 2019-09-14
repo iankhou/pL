@@ -4,34 +4,37 @@ import { Draft } from '../Draft';
 import { Organize } from '../Organize';
 import { Match } from '../Match';
 
-const Game = props => {
-  const { phase } = props.ctx;
-  switch (phase) {
-    case 'lobby':
-      return (
-        <div>
-          <Lobby />
-        </div>
-      );
-    case 'draft':
-      return (
-        <div>
-          <Draft />
-        </div>
-      );
-    case 'organize':
-      return (
-        <div>
-          <Organize />
-        </div>
-      );
-    case 'match':
-      return (
-        <div>
-          <Match />
-        </div>
-      );
+class Game extends React.Component {
+  state = {};
+  render() {
+    const { phase } = this.props.ctx;
+    switch (phase) {
+      case 'lobby':
+        return (
+          <div>
+            <Lobby events={this.props.events} />
+          </div>
+        );
+      case 'draft':
+        return (
+          <div>
+            <Draft />
+          </div>
+        );
+      case 'organize':
+        return (
+          <div>
+            <Organize />
+          </div>
+        );
+      case 'match':
+        return (
+          <div>
+            <Match />
+          </div>
+        );
+    }
   }
-};
+}
 
 export default Game;
