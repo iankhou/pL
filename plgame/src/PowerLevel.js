@@ -22,7 +22,6 @@ const PowerLevel = Game({
   setup: () => ({
     deck: characters,
   }),
-
   moves: {
     draftCard: (G, Card) => {
       G.deck.pop(Card);
@@ -47,7 +46,7 @@ const PowerLevel = Game({
       if (G.selectedCard === OCard) {
         TCard.hp -= OCard.attack;
       } else {
-        return 'INVALID_MOVE';
+        return "INVALID_MOVE";
       }
     },
 
@@ -58,7 +57,6 @@ const PowerLevel = Game({
 
   flow: {
     startingPhase: 'lobby',
-
     turnOrder: TurnOrder.DEFAULT,
 
     endGameIf: (G, ctx) => {
@@ -96,10 +94,10 @@ const PowerLevel = Game({
           G.active = G.active.filter(card => card.hp > 0);
         },
         endPhaseIf: G => G.finished === true,
-        next: 'gameOver',
-      },
-    },
-  },
+        next: "gameOver"
+      }
+    }
+  }
 });
 
 export default PowerLevel;
