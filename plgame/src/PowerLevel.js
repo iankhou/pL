@@ -1,24 +1,27 @@
-import { Game } from "boardgame.io/core";
-import { TurnOrder } from "boardgame.io/dist/core";
+import { Game } from 'boardgame.io/core';
+import { TurnOrder } from 'boardgame.io/dist/core';
+import { PluginPlayer } from 'boardgame.io/plugins';
+import characters from './characters';
 
 // check if a player has no cards left
-const isGameEnd = G => (!G.active.length && !G.reserve.length ? true : false);
-
-// Deprecate
-const pullFromDB = () => null;
+const isGameEnd = (G, ctx) =>
+  ctx.phase === 'play' &&
+  ((!G.players[0].active.length && !G.players[0].reserve.length) ||
+    (!G.players[1].active.length && !G.players[1].reserve.length));
 
 const PowerLevel = Game({
-  setup: () => ({
-    deck: pullFromDB(),
+  playerSetup: playerID => ({
+    id: playerID,
     active: [],
     reserve: [],
-    currCard: null
+    currCard: null,
   }),
-  // TODO: Initialize array of Cards in G.deck
-  // TODO: Initialize array of Cards in G.active
-  // TODO: Initialize array of Cards in G.reserve
-  // TODO: Initialize currCard
+  plugins: [PluginPlayer],
 
+  // TODO: Import a deck of characters
+  setup: () => ({
+    deck: characters,
+  }),
   moves: {
     draftCard: (G, Card) => {
       G.deck.pop(Card);
@@ -49,38 +52,44 @@ const PowerLevel = Game({
 
     endTurn: G => {
       G.finished = true;
-    }
+    },
   },
 
   flow: {
-    startingPhase: "draft",
-
+    startingPhase: 'lobby',
     turnOrder: TurnOrder.DEFAULT,
 
     endGameIf: (G, ctx) => {
-      if (isGameEnd(G)) {
+      if (isGameEnd(G, ctx)) {
         // returns the loser
         return { loser: ctx.currentPlayer };
       }
     },
 
     phases: {
+      lobby: {
+        next: 'draft',
+      },
       draft: {
         // players draft 8 cards into their squad
-        allowedMoves: ["draftActive", "draftReserve"],
-        endPhaseIf: G => G.squad >= 8,
-        next: "organize"
+        allowedMoves: ['draftActive', 'draftReserve'],
+        endPhaseIf: G => G.players[0].squad >= 8 && G.players[0].squad >= 8,
+        next: 'organize',
       },
 
       organize: {
         // players place 5 cards into active and 3 cards into reserve
-        allowedMoves: ["placeActive", "placeReserve"],
-        endPhaseIf: G => G.active >= 5 && G.reserve >= 3,
-        next: "play"
+        allowedMoves: ['placeActive', 'placeReserve'],
+        endPhaseIf: G =>
+          G.players[0].active >= 5 &&
+          G.players[0].reserve >= 3 &&
+          G.players[1].active >= 5 &&
+          G.players[1].reserve >= 3,
+        next: 'play',
       },
 
       play: {
-        allowedMoves: ["playCard", "endTurn"],
+        allowedMoves: ['playCard', 'endTurn'],
         onTurnEnd: G => {
           G.active = G.active.filter(card => card.hp > 0);
         },
